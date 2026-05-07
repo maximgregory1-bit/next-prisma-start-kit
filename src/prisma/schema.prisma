@@ -1,0 +1,190 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users User[] @relation("UserRoles")
+}
+
+model User {
+  id                    String                 @id @default(cuid())
+  name                  String?
+  email                 String?                @unique
+  emailVerified         DateTime?
+  password              String?
+  image                 String?
+  phone                 String?                @unique
+  isTwoFactorEnabled    Boolean                @default(false)
+  isApproved            Boolean                @default(false)
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  accounts              Account[]
+  sessions              Session[]
+  TwoFactorConfirmation TwoFactorConfirmation?
+  roles                 Role[]                 @relation("UserRoles")
+}
+
+model VerificationToken {
+  id      Int      @id @default(autoincrement())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorConfirmation {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Customer {
+  id              Int        @id @default(autoincrement())
+  name            String     @unique
+  paidStatus      PaidStatus @default(PAID)
+  owed            Float      @default(0)
+  status          Boolean    @default(true)
+  isBundle        Boolean    @default(false)
+  price           Float      @default(7.5)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  contactName     String?    @unique
+  bundlePrice     Float      @default(1000)
+  isShowSaved     Boolean    @default(false)
+  isShowPercent   Boolean    @default(false)
+  isWeekly        Boolean    @default(false)
+  weeklyLead      Int?
+  email           String?
+  phone           String
+  invoiceIndex    String?
+  isHoliday       Boolean    @default(true)
+  extraText       String?
+  customCredit    Int?
+  isTotalLeadQty  Boolean    @default(false)
+  noHolidayList   String?
+  agents          Agent[]
+  campaigns       Campaign[]
+  invoices        Invoice[]
+  isExcludeReport Boolean    @default(false)
+}
+
+model Campaign {
+  id           Int      @id @default(autoincrement())
+  customerId   Int
+  name         String   @unique
+  abbreviation String?
+  status       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  customer     Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@unique([customerId, name])
+}
+
+model Agent {
+  id         Int      @id @default(autoincrement())
+  customerId Int
+  name       String
+  sheet      String?
+  status     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  tab        String?
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@unique([customerId, name])
+}
+
+model Setting {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  value     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Invoice {
+  id              Int            @id @default(autoincrement())
+  customerId      Int
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  sendDate        DateTime
+  startDate       DateTime
+  endDate         DateTime
+  amount          Float
+  excelFile       String
+  imageFile       String
+  prior           Float?
+  pageOrientation Boolean        @default(true)
+  customer        Customer       @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  notifications   Notification[]
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  invoiceId Int
+  email     String?
+  phone     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  invoice   Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
+
+enum PaidStatus {
+  PAID
+  LEFT
+  OWED
+  OTHER
+}
