@@ -83,8 +83,8 @@ export function ForgotPasswordPage() {
                 <Lock className="ml-2 inline-block size-5 text-primary" />
               </h1>
               <p className="text-sm text-muted-foreground">
-                Enter your email and we&apos;ll send you instructions to reset your
-                password
+                Enter your email and we&apos;ll send you instructions to reset
+                your password
               </p>
             </div>
             <form className="space-y-4" onSubmit={handleSubmit}>
@@ -100,7 +100,10 @@ export function ForgotPasswordPage() {
                   required
                 />
               </div>
-              <Button className="h-10 w-full rounded-md" disabled={isSubmitting}>
+              <Button
+                className="h-10 w-full rounded-md"
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? "Sending..." : "Send Reset Link"}
               </Button>
             </form>

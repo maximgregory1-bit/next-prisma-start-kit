@@ -121,7 +121,9 @@ export function ResetPasswordPage() {
                     type="button"
                     onClick={() => setShowPassword((prev) => !prev)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
                   >
                     {showPassword ? (
                       <EyeOff className="size-4" />
@@ -161,7 +163,10 @@ export function ResetPasswordPage() {
                   </button>
                 </div>
               </div>
-              <Button className="h-10 w-full rounded-md" disabled={isSubmitting}>
+              <Button
+                className="h-10 w-full rounded-md"
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? "Updating..." : "Set new password"}
               </Button>
             </form>

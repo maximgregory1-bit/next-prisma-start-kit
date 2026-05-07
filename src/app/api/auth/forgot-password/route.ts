@@ -23,14 +23,15 @@ export async function POST(request: Request) {
   if (!parsed.success) {
     return NextResponse.json(
       { message: "Invalid request", issues: parsed.error.flatten() },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   const { email } = parsed.data;
   const rawToken = crypto.randomBytes(32).toString("hex");
   const tokenHash = hashToken(rawToken);
-  const baseUrl = env.NEXTAUTH_URL ?? env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const baseUrl =
+    env.NEXTAUTH_URL ?? env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
   try {
     const user = await prisma.user.findUnique({
@@ -55,12 +56,14 @@ export async function POST(request: Request) {
       await sendResetEmail({ to: user.email, resetLink });
     }
 
-    return NextResponse.json({ message: "If the email exists, a reset link was sent." });
+    return NextResponse.json({
+      message: "If the email exists, a reset link was sent.",
+    });
   } catch (error) {
     console.error("Forgot password failed", error);
     return NextResponse.json(
       { message: "Unable to process request" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
