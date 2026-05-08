@@ -1,6 +1,6 @@
-## Logistics Dashboard
+## Start Kit Dashboard
 
-Responsive logistics dashboard UI built with Next.js, Tailwind CSS, and shadcn/ui.
+Responsive Start Kit dashboard UI built with Next.js, Tailwind CSS, and shadcn/ui.
 
 ### Auth
 
