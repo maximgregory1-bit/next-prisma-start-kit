@@ -101,14 +101,14 @@ export function SignUpPage() {
             <div className="flex items-center justify-center gap-2">
               <Image
                 src="/images/logo.png"
-                alt="LeaderGroup"
+                alt="start-kit"
                 width={150}
                 height={28}
                 className="dark:hidden w-fit"
               />
               <Image
                 src="/images/white_logo.png"
-                alt="LeaderGroup"
+                alt="start-kit"
                 width={150}
                 height={28}
                 className="hidden dark:block w-fit"

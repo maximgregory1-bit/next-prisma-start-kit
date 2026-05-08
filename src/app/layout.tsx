@@ -31,7 +31,7 @@ const publicSans = Public_Sans({
 });
 
 export const metadata: Metadata = {
-    title: "LeaderGroup Logistics Dashboard",
+    title: "start-kit Logistics Dashboard",
     description: "Fleet insights and delivery performance overview.",
     icons: {
         icon: "/favicon.ico",

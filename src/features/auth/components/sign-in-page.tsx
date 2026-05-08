@@ -73,12 +73,12 @@ export function SignInPage() {
                 <Card className="w-full max-w-md border-border/60 bg-card/90 shadow-xl backdrop-blur">
                     <CardContent className="space-y-6 p-8">
                         <div className="flex items-center justify-center gap-2">
-                            <Image src="/images/logo.png" alt="LeaderGroup" width={150} height={28} className="dark:hidden w-fit" />
-                            <Image src="/images/white_logo.png" alt="LeaderGroup" width={150} height={28} className="hidden dark:block w-fit" />
+                            <Image src="/images/logo.png" alt="start-kit" width={150} height={28} className="dark:hidden w-fit" />
+                            <Image src="/images/white_logo.png" alt="start-kit" width={150} height={28} className="hidden dark:block w-fit" />
                         </div>
                         <div className="space-y-2 text-center">
                             <h1 className="text-xl font-semibold text-foreground">
-                                Welcome to LeaderGroup!
+                                Welcome to start-kit!
                                 <span className="ml-1">&#128075;</span>
                             </h1>
                             <p className="text-sm text-muted-foreground">Please sign-in to your account</p>
