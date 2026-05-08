@@ -62,12 +62,12 @@ function SidebarContent({ activeItem, activeChild }: { activeItem?: string; acti
             <div className={cn("flex items-center justify-center px-5 py-6", collapsed ? "justify-center" : "gap-3")}>
                 {collapsed ? (
                     <Link href="/dashboard" className="flex items-center justify-center text-xl font-black text-primary">
-                        LG
+                        SK
                     </Link>
                 ) : (
                     <Link href="/dashboard" className="flex items-center justify-center gap-3">
-                        <Image src="/images/logo.png" alt="LeaderGroup" width={200} height={25} className="dark:hidden " />
-                        <Image src="/images/white_logo.png" alt="LeaderGroup" width={200} height={25} className="hidden dark:block " />
+                        <Image src="/images/logo.png" alt="start-kit" width={200} height={25} className="dark:hidden " />
+                        <Image src="/images/white_logo.png" alt="start-kit" width={200} height={25} className="hidden dark:block " />
                     </Link>
                 )}
             </div>

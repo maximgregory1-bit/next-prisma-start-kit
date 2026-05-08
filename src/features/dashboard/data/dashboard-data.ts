@@ -43,16 +43,6 @@ export const navigation: NavSection[] = [
         isActive: true,
       },
       {
-        label: "Customer",
-        icon: Users,
-        link: "/customer",
-      },
-      {
-        label: "Invoice",
-        icon: CreditCard,
-        link: "/invoice",
-      },
-      {
         label: "Setting",
         icon: Settings,
         link: "/setting",

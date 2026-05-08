@@ -5,7 +5,7 @@ Responsive logistics dashboard UI built with Next.js, Tailwind CSS, and shadcn/u
 ### Auth
 
 - Credentials-based auth via NextAuth.
-- Protected routes: `/dashboard`, `/customer`, `/invoice`, `/setting`.
+- Protected routes: `/dashboard`, `/setting`.
 
 ### Environment
 
